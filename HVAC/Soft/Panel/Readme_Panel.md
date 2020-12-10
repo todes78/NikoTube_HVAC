@@ -33,7 +33,41 @@
 
 Выполнется при загрузке графической панели 
 
+```pascal
+macro_command main()
 
+bool menu_button 
+int addr1
+int ipaddr[4]
+
+short lgn
+int pass
+bool passok
+
+// Initialization menu button on start system
+menu_button = true
+SetData(menu_button, "Local HMI", LB, 0, 1)
+
+// Initialization Option menu
+SetData(menu_button, "Local HMI", LB, 9, 1)
+
+// Initialization network adresses
+GetDataEx(addr1, "Local HMI", RW, 100, 1)
+GetDataEx(ipaddr[0], "Local HMI", RW, 101, 4)
+SetDataEx(addr1, "Local HMI", LW, 10000, 1)
+SetDataEx(ipaddr[0], "Local HMI", LW, 9600, 4)
+
+// Initialization administration
+passok = 0
+lgn = 0
+pass = 0
+SetData(passok, "Local HMI", LB, 1201, 1)
+SetData(passok, "Local HMI", LB, 1202, 1)
+SetData(lgn, "Local HMI", LW, 9219, 1)
+SetData(pass, "Local HMI", LW, 9220, 1)
+
+end macro_command
+```
 
 
 
@@ -43,17 +77,52 @@
 
 Выбор меню осуществляется с помощью кнопок CB0..CB5 
 
-LB0 - состояние кнопки "Главная"
+    LB0 - состояние кнопки "Главная"
+    LB1 - состояние кнопки "Параметры"
+    LB2 - состояние кнопки "Система охлаждения"
+    LB3 - состояние кнопки "Сообщения"
+    LB4 - состояние кнопки "Графики"
+    LB5 - состояние кнопки "Настройка"
 
-LB1 - состояние кнопки "Параметры"
+Состояние СУ осушествляется с помощью лампочек BL0..BL3
 
-LB2 - состояние кнопки "Система охлаждения"
+    LB20 - Готовность к работе
+    LB21 - Работа
+    LB22 - Предупреждение
+    LB23 - Авария
 
-LB3 - состояние кнопки ""
+### TOOLS (16)
 
-LB4 - состояние кнопки ""
+Выбор окна настроек осуществляется с помощью кнопок CB0..CB4 
 
-LB5 - состояние кнопки ""
+    LB6 - состояние кнопки "Авторизация"
+    LB7 - состояние кнопки "Экраны"
+    LB8 - состояние кнопки "Панель"
+    LB9 - состояние кнопки "Терминал"
+    LB10 - состояние кнопки "Сеть"
+
+
+### NetworkSettings (100)    
+
+
+
+## Терминал
+
+
+
+## Администрирование
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 **Описание переменных:**
